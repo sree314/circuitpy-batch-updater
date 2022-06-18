@@ -26,6 +26,7 @@ class Boot:
         return None
 
     def _do_update(self, src, dst):
+        print(f"Updating {dst} from {src}")
         shutil.copyfile(src, dst)
         os.sync()
 
@@ -33,15 +34,13 @@ class Boot:
         src = bootfw
         dst = self.path / update_name
 
-        print(src, dst)
         self._do_update(src, dst)
 
     def update_cktpy(self, cktpyfw):
         src = Path(cktpyfw)
         dst = self.path / src.name
 
-        print(src, dst)
-        #self._do_update(src, dst)
+        self._do_update(src, dst)
 
     def eject(self):
         # udiskctl, but need device underlying path
