@@ -30,7 +30,7 @@ if __name__ == "__main__":
     if ty == "CIRCUITPY":
         cp = CircuitPy(p)
         cp.load_boot()
-        print(cp.boot[0])
+        print("Current CircuitPython", cp.boot[0])
 
         rp = Repl(args.tty, cp)
         rp.reboot_into_boot()
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     if ty == "BOOT":
         cp = Boot(p)
         cp.load_info()
-        print(cp.uf2_version())
+        print("Current Bootloader", cp.uf2_version())
         print("Updating Bootloader")
         cp.update_bootloader(args.bootloader)
 
@@ -54,6 +54,9 @@ if __name__ == "__main__":
             print(f"Waiting for {p}")
             time.sleep(5)
             if p.exists(): break
+
+        cp.load_info()
+        print("Updated Bootloader", cp.uf2_version())
 
         print("Updating CircuitPython")
         cp.update_cktpy(args.cktpy)
@@ -63,5 +66,9 @@ if __name__ == "__main__":
             print(f"Waiting for {p}")
             time.sleep(5)
             if p.exists(): break
+
+        cp = CircuitPy(p)
+        cp.load_boot()
+        print("Updated CircuitPython", cp.boot[0])
 
     print("Done")
