@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+#
+# Copyright (C) 2022 Sreepathi Pai
+#
+# SPDX-License-Identifier: 0BSD
 
 from pathlib import Path
 import shutil
